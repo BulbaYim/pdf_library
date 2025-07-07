@@ -1,0 +1,23 @@
+prompts:
+  sys_prompt: >
+    You are a helpful assistant extracting metadata in JSON format.
+  
+  user_prompt_template: |
+    Extract metadata from the following health related pdf text and return as clean JSON with keys: title, summary, tags, year_published, organization, country, language:
+    tags is a list of tags, all other fields should be single value.
+    Text:
+    """
+    {input_text}
+    """
+  responce_keys:
+    - title
+    - summary
+    - tags
+    - year_published
+    - organization
+    - country
+    - language
+
+pdf_search:
+  api_url: "https://api.openalex.org/works?filter=concept.id:C121332964,has_pmid:true,primary_location.source.type:journal,publication_year:2022-2025&per_page=200&page={page}"
+
