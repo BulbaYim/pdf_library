@@ -31,6 +31,50 @@ pdf_library/
 └── requirements.txt       # Python dependencies
 ```
 
+## Database Table Structure
+
+### `pdf_metadata`
+Stores extracted metadata for each processed PDF.
+
+| Column           | Type            | Description                                 |
+|------------------|-----------------|---------------------------------------------|
+| id               | serial PRIMARY KEY | Auto-incrementing unique row identifier     |
+| title            | text            | Title of the document                       |
+| summary          | text            | Summary of the document                     |
+| tags             | array           | List of tags (topics/keywords)              |
+| year_published   | text            | Year of publication                         |
+| organization     | text            | Publishing organization                     |
+| country          | text            | Country of origin                           |
+| language         | text            | Language of the document                    |
+| pdf_path         | text            | Local file path to the downloaded PDF       |
+
+### `download_logs`
+Logs each PDF download attempt.
+
+| Column         | Type            | Description                                 |
+|----------------|-----------------|---------------------------------------------|
+| id             | serial PRIMARY KEY | Auto-incrementing unique row identifier     |
+| url            | text            | Source URL of the PDF                       |
+| local_path     | text            | Local file path (if downloaded)             |
+| status         | text            | Download status (success, error, etc.)      |
+| error_message  | text            | Error message if download failed            |
+| duration_sec   | float           | Download duration in seconds                |
+| timestamp      | text            | Download timestamp                          |
+
+### `extraction_logs`
+Logs each AI metadata extraction attempt.
+
+| Column         | Type            | Description                                 |
+|----------------|-----------------|---------------------------------------------|
+| id             | serial PRIMARY KEY | Auto-incrementing unique row identifier     |
+| sys_prompt     | text            | System prompt used for extraction           |
+| prompt         | text            | User prompt used for extraction             |
+| response       | text            | Raw AI response                             |
+| status         | text            | Extraction status (success, error, etc.)    |
+| error_message  | text            | Error message if extraction failed          |
+| duration_sec   | float           | Extraction duration in seconds              |
+| timestamp      | text            | Extraction timestamp                        |
+
 ## Setup
 
 1. Install dependencies:
